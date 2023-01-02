@@ -1,3 +1,7 @@
+body {
+    background-color: #372B51;
+}
+
 .main {
     display: flex;
     height: 100vh;
@@ -10,7 +14,7 @@
 h1 {
     margin: 10px;
     font-size: 40px;
-    color: rgb(1, 1, 59);
+    color: #F7F7F6;
 }
 
 .search {
@@ -18,13 +22,32 @@ h1 {
 }
 
 ul li {
+    list-style: none;
     font-size: 20px;
 } 
+
+p {
+    font-size: 20px;
+    color: #F7F7F6;
+}
 
 button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 5px;
+    margin-top: 5px !important;
     width: 100%;
+    background-color: #99B7D1 !important;
+}
+
+input {
+    background-color: #F7F7F6 !important;
+}
+
+.MuiList-root {
+    background-color: #A17597;
+    color: #F7F7F6;
+    padding: 0 !important;
+    margin-top: 5px !important;
+    text-transform: capitalize;
 }

@@ -28,6 +28,7 @@ class BandrConfig {
                 }
             }
         }
+        println(Gson().toJson(bandToArtists))
         return bandToArtists
     }
 

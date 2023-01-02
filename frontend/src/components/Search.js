@@ -1,8 +1,13 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState } from 'react'
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import PlayCircle from '@mui/icons-material/PlayCircle';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { Divider } from '@mui/material';
 
-
-function List(props) {
+function Search(props) {
     //create a new array by filtering the original array
     const [bands, setBands] = useState([]);
     const [inputText, setInputText] = useState("");
@@ -31,14 +36,24 @@ function List(props) {
                 fullWidth
                 label="Search"
             />
-            <button onClick={fetchData}>Fetch Bands</button>
-            <ul>
+            <Button
+                onClick={fetchData}
+                variant="contained">
+                Fetch Bands&nbsp;
+                <PlayCircle></PlayCircle>
+            </Button>
+            <List component="nav" aria-label="mailbox folders">
                 {bands.map((band) => (
-                    <li key={band}>{band}</li>
+                <div>
+                    <ListItem button>
+                        <ListItemText primary={band} />
+                    </ListItem>
+                    <Divider />
+                </div>
                 ))}
-            </ul>
+            </List>
         </div>
     )
 }
 
-export default List
+export default Search
