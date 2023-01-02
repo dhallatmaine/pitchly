@@ -1,4 +1,4 @@
-package com.vecowskistudios.bandr
+package com.vecowskistudios.pitchly
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

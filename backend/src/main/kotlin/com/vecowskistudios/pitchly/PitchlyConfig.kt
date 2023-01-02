@@ -1,4 +1,4 @@
-package com.vecowskistudios.bandr
+package com.vecowskistudios.pitchly
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
 
 @Configuration
-class BandrConfig {
+class PitchlyConfig {
 
     @Bean
     fun artists(): Map<String, Set<String>> {

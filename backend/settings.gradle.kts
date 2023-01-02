@@ -1,1 +1,1 @@
-rootProject.name = "bandr"
+rootProject.name = "pitchly"

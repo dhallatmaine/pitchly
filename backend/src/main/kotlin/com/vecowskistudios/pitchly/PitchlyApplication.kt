@@ -1,11 +1,11 @@
-package com.vecowskistudios.bandr
+package com.vecowskistudios.pitchly
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class BandrApplication
+class PitchlyApplication
 
 fun main(args: Array<String>) {
-    runApplication<BandrApplication>(*args)
+    runApplication<PitchlyApplication>(*args)
 }
