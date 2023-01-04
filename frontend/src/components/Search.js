@@ -46,7 +46,7 @@ function Search(props) {
                 {bands.map((band) => (
                 <div>
                     <ListItem button>
-                        <ListItemText primary={band} />
+                        <ListItemText primary={band.name} secondary={band.level} />
                     </ListItem>
                     <Divider />
                 </div>

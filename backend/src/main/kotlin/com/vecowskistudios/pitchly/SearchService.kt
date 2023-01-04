@@ -11,39 +11,43 @@ class SearchService(
 ) {
 
     // Search for a band, get a list of bands back
-    fun search(searchBand: String): List<String> {
-        val results = mutableSetOf<String>()
+    fun search(searchBand: String): List<BandLevel> {
+        val results = mutableSetOf<BandLevel>()
 
-        val artistsInBand = bands[searchBand] ?: throw RuntimeException("$searchBand not found.")
-
-        val artistQueue = LinkedList(artistsInBand)
+        val artistQueue = LinkedList<List<String>>()
         val visitedArtists = mutableSetOf<String>()
 
-        val bandQueue = LinkedList<String>()
+        val bandQueue = LinkedList(listOf(listOf(searchBand)))
         val visitedBands = mutableSetOf(searchBand)
 
-        // first we check each artist in the band for additional bands
-        // then we go through those bands and add artists we haven't checked yet
-        while (artistQueue.isNotEmpty()) {
-            val artist = artistQueue.pollFirst()
-            visitedArtists.add(artist)
+        var level = 0
+        while (bandQueue.isNotEmpty()) {
+            val bandsInQueue = bandQueue.pollFirst()
+            if (bandsInQueue.isEmpty()) continue;
+            results.addAll(bandsInQueue.map { BandLevel(it, level) })
+            level++
 
-            val artistBands = (artists[artist] ?: emptySet())
-                .filterNot { visitedBands.contains(it) }
-            bandQueue.addAll(artistBands)
+            val bandArtists = bandsInQueue
+                .flatMapTo(mutableSetOf()) { bands[it] ?: emptySet() }
+                .filterNot { visitedArtists.contains(it) }
+            visitedArtists.addAll(bandArtists)
+            artistQueue.add(bandArtists)
 
-            while (bandQueue.isNotEmpty()) {
-                val band = bandQueue.pollFirst()
-                visitedBands.add(band)
-                results.add(band)
+            while (artistQueue.isNotEmpty()) {
+                val artistsInQueue = artistQueue.pollFirst()
+                if (artistsInQueue.isEmpty()) continue;
 
-                val artists = (bands[band] ?: emptySet())
-                    .filterNot { visitedArtists.contains(it) }
-                artistQueue.addAll(artists)
+                val artistBands = artistsInQueue
+                    .flatMapTo(mutableSetOf()) { artists[it] ?: emptySet() }
+                    .filterNot { visitedBands.contains(it) }
+                visitedBands.addAll(artistBands)
+                bandQueue.add(artistBands)
             }
         }
 
         return results.toList()
+            .filterNot { it.name == searchBand }
+            .sortedBy { it.level }
     }
 
 

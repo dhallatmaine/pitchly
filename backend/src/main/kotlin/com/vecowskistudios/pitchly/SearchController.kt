@@ -10,7 +10,7 @@ class SearchController(
 ) {
 
     @GetMapping("/")
-    fun search(@RequestParam(value = "band") band: String): List<String> {
+    fun search(@RequestParam(value = "band") band: String): List<BandLevel> {
         return searchService.search(band)
     }
 
